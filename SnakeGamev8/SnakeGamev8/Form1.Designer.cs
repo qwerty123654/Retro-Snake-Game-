@@ -86,10 +86,6 @@
             labelHighScore.TabIndex = 4;
             labelHighScore.Text = "High Score: 0";
             // 
-            // gameTimer
-            // 
-            gameTimer.Tick += gameTimer_Tick;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);

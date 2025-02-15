@@ -4,14 +4,14 @@ namespace SnakeGamev8
 {
     public partial class Form1 : Form
     {
-        private GameManger gamemanager;
-        private System.Windows.Forms.Timer Timer;
+        private GameManger? gamemanager;
 
         public Form1()
         {
             InitializeComponent();
 
-            gameTimer.Interval = 1000;
+            gameTimer = new System.Windows.Forms.Timer();
+            gameTimer.Interval = 150;
             gameTimer.Tick += gameTimer_Tick;
             gameTimer.Start();
         }
@@ -49,7 +49,6 @@ namespace SnakeGamev8
         }
         private void OnKeyUp(object sender, KeyEventArgs e)
         {
-
         }
 
 
@@ -61,18 +60,25 @@ namespace SnakeGamev8
         /// <param name="e"></param>
         private void gameTimer_Tick(object sender, EventArgs e)
         {
-            if (!gamemanager.Update())
+            if (gamemanager != null)
             {
-                gameTimer.Stop();
-                buttonStart.Enabled = true;
-                MessageBox.Show("Game Over! Final Score: " + gamemanager.Score);
+                if (!gamemanager.Update())
+                {
+                    gameTimer.Stop();
+                    buttonStart.Enabled = true;
+                    MessageBox.Show("Game Over! Final Score: " + gamemanager.Score);
+                }
+                pictureBoxDisplay.Invalidate();
             }
-            pictureBoxDisplay.Invalidate();
         }
 
         private void UpadateGraphics(object sender, PaintEventArgs e)
         {
-            gamemanager.Draw(e.Graphics);
+            if (gamemanager != null)
+            {
+                gamemanager.Draw(e.Graphics);
+            }
+
         }
         /// <summary>
         /// Displays the Score
@@ -82,6 +88,10 @@ namespace SnakeGamev8
         {
             labelScore.Text = "Score: " + score;
         }
+        /// <summary>
+        /// Display High score
+        /// </summary>
+        /// <param name="HighestScore"></param>
         private void UpdateHighScore(int HighestScore)
         {
             labelHighScore.Text = "High Score: " + HighestScore;

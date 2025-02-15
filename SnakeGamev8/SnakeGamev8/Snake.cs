@@ -60,9 +60,10 @@ namespace SnakeGamev8
         /// Checks the body segments and looks for contact with another square if a collision ocurs then the object with return true else it will stay false
         /// </summary>
         /// <returns></returns>
-        public bool CheckforCollisions()
+        public bool checkforcollisions()
         {
-            for (int i = 0; i < body.Count; i++)
+            MessageBox.Show(" collsion");
+            for (int i = 1; i < body.Count; i++)
             {
                 if (body[0].IntersectsWith(body[i]))
                     return true;

@@ -34,20 +34,18 @@ namespace SnakeGamev8
         /// </summary>
         public void HighScoreUpdate()
         {
-            if (Score == HighScore || Score < HighScore)
+            if (Score >= HighScore)
             {
                 HighScore = Score;
-            }
-            else if (Score > HighScore)
-            {
-                Score = HighScore;
             }
         }
 
         public bool Update()
         {
             snake.Move();
-            if (snake.body[0].X < 0 || snake.body[0].X >= 400 || snake.body[0].Y < 0 || snake.body[0].Y >= 400 || snake.CheckforCollisions())
+            if (snake.body[0].X < 0 || snake.body[0].X >= 400 ||
+                snake.body[0].Y < 0 || snake.body[0].Y >= 400 || 
+                snake.checkforcollisions())
             {
                 HighScoreUpdate();
                 return false;
@@ -76,9 +74,5 @@ namespace SnakeGamev8
             }
         }
 
-        public enum Directions
-        {
-            left, right, top, bottom
-        }
     }
 }
